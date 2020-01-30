@@ -20,7 +20,6 @@ const PostContainer = () => {
     const [posts, setPosts] = useState([])
 
     const addReaction = (newComment) => {
-        // console.log(newComment)
         fetch(`http://localhost:4000/reactions`, {
             method: 'POST', 
             headers: {
@@ -30,6 +29,7 @@ const PostContainer = () => {
         })
         .then(r => r.json())
         .then((updatedPost) => {
+            console.log("adding reaction trigger")
             let index = posts.findIndex(post => post.id === updatedPost.id)
             setPosts([...posts.slice(0, index), updatedPost, ...posts.slice(index + 1)])
         })
@@ -41,6 +41,8 @@ const PostContainer = () => {
         .then((json) => {
             json.reverse()
             setPosts(json)
+            console.log("use effect")
+
         })
     })
 

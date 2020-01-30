@@ -29,6 +29,7 @@ const NewPost = (props) => {
         .then((json) => {
             setImage_url("")
             setComment("")
+            console.log("create new post")
         })
     }
 

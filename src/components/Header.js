@@ -3,8 +3,20 @@ import { NavLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+
+
 
 function Header (props) {
+
+    const theme = createMuiTheme({
+        typography: {
+          // Tell Material-UI what the font-size on the html element is.
+          htmlFontSize: 8,
+        },
+    });
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -19,7 +31,10 @@ function Header (props) {
     return (
         <div>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                @ANON
+
+                <ThemeProvider theme={theme}>
+                    <Typography>@ANON</Typography>
+                </ThemeProvider>
             </Button>
             <Menu
                 id="simple-menu"
@@ -28,8 +43,27 @@ function Header (props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-            <MenuItem onClick={handleClose}><NavLink exact to="/"> HOME </NavLink></MenuItem>
-            <MenuItem onClick={handleClose}><NavLink exact to="/post"> UPLOAD </NavLink></MenuItem>
+            <MenuItem onClick={handleClose}><NavLink  
+                style={{
+                    textDecoration: "non"
+                }} 
+                activeStyle={{
+                    textDecoration: "none",
+                    fontWeight: "bold",
+                    color: "black"
+                }} exact to="/"> HOME 
+            </NavLink></MenuItem>
+            <MenuItem onClick={handleClose}><NavLink 
+                style={{
+                    textDecoration: "non"
+                }}
+                activeStyle={{
+                    textDecoration: "none",
+                    fontWeight: "bold",
+                    color: "black"
+                }}
+                exact to="/post"> UPLOAD 
+            </NavLink></MenuItem>
             </Menu>
         </div>
     )
