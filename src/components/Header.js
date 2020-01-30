@@ -1,13 +1,24 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-class Header extends React.Component {
-    render() {
-        return (
-            <div>
-                header
-            </div>
-        )
-    }
+function Header (props) {
+
+    return (
+        <div>
+            <NavLink 
+                exact 
+                to="/"
+            > HOME 
+            </NavLink>
+
+            <NavLink 
+                exact 
+                to="/post"
+            > Upload 
+            </NavLink>
+        </div>
+    )
+
 }
 
 export default Header 

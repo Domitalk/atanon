@@ -1,19 +1,16 @@
 import React from 'react'
 import Reaction from './Reaction'
 
-class Post extends React.Component {
+function Post (props) {
 
-    render() {
-        console.log(this.props.post)
-        return (
-            <div>
-                {/* post  */}
-                <img src={this.props.post.image_url} alt="" />
-                {this.props.post.comment}
-                <Reaction post={this.props.post} /> 
-            </div>
-        )
-    }
+    return (
+        <div>
+            <img src={props.post.image_url} alt="" />
+            {props.post.comment}
+            <Reaction post={props.post} addReaction={props.addReaction} /> 
+        </div>
+    )
+    
 }
 
 export default Post 
