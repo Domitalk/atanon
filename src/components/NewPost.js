@@ -1,50 +1,48 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 
-class NewPost extends React.Component {
+const NewPost = (props) => {
 
-    state = {
-        image_url: "",
-        comment: ""
+    const [image_url, setImage_url] = useState("")
+    const [comment, setComment] = useState("")
+
+    const handleChange = (event) => {
+        if (event.target.name === "image_url") {
+            setImage_url(event.target.value)
+        } else if (event.target.name === "comment") {
+            setComment(event.target.value)
+        }
     }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
         fetch('http://localhost:4000/posts', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({
+                image_url,
+                comment
+            })
         })
         .then(r => r.json())
         .then((json) => {
-            // window.history.pushState("UploadFinished", "Home", "/");
-            this.setState({
-                image_url: "",
-                comment: ""
-            })
+            setImage_url("")
+            setComment("")
         })
     }
 
-    render() {
-        return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input name="image_url" value={this.state.image_url} onChange={this.handleChange} />
-                    <input name="comment" value={this.state.comment} onChange={this.handleChange} />
-                    <input type="submit" />
-                </form>
-            </div>
-        )
-    }
+    return(
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input name="image_url" value={image_url} onChange={handleChange} />
+                <input name="comment" value={comment} onChange={handleChange} />
+                <input type="submit" />
+            </form>
+        </div>
+    )
 
 }
 
 export default NewPost
+

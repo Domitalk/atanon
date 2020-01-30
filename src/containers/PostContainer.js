@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Post from '../components/Post'
 
-class PostContainer extends React.Component {
 
-    state = {
-        posts: []
-    }
 
-    addReaction = (newComment) => {
-        console.log(newComment)
+const PostContainer = () => {
+
+    const [posts, setPosts] = useState([])
+
+    const addReaction = (newComment) => {
+        // console.log(newComment)
         fetch(`http://localhost:4000/reactions`, {
             method: 'POST', 
             headers: {
@@ -18,41 +18,32 @@ class PostContainer extends React.Component {
         })
         .then(r => r.json())
         .then((updatedPost) => {
-            // console.log(updatedPost)
-            let index = this.state.posts.findIndex(post => post.id === updatedPost.id)
-            this.setState({
-                posts: [...this.state.posts.slice(0, index), updatedPost, ...this.state.posts.slice(index + 1)]
-            })
-            
+            let index = posts.findIndex(post => post.id === updatedPost.id)
+            setPosts([...posts.slice(0, index), updatedPost, ...posts.slice(index + 1)])
         })
     }
 
-    componentDidMount() {
- 
+    useEffect(() => {
         fetch('http://localhost:4000/posts')
         .then(r => r.json())
         .then((json) => {
             json.reverse()
-            this.setState({
-                posts: json
-            })
+            setPosts(json)
+        })
+    })
+
+    const mapAllPosts = () => {
+        return posts.map((post) => {
+            return <Post key={post.id} post={post} addReaction={addReaction} />
         })
     }
 
-    mapAllPosts = () => {
-        return this.state.posts.map((post) => {
-            return <Post key={post.id} post={post} addReaction={this.addReaction} />
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                post container
-                {this.mapAllPosts()}
-            </div>
-        )
-    }
+    return (
+        <div>
+            post container
+            {mapAllPosts()}
+        </div>
+    )
 
 }
 
