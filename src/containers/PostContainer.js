@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Post from '../components/Post'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,6 +14,12 @@ const useStyles = makeStyles(theme => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
+    progressRoot: {
+        width: '100%',
+        '& > * + *': {
+          marginTop: theme.spacing(2),
+        },
+      },
   }));
 
 const PostContainer = () => {
@@ -19,7 +27,7 @@ const PostContainer = () => {
 
     const [posts, setPosts] = useState([])
 
-    const [isFetching, setIsFetching] = useState(false)
+    const [isFetching, setIsFetching] = useState(true)
 
     const addReaction = (newComment) => {
         fetch(`http://localhost:4000/reactions`, {
@@ -41,9 +49,11 @@ const PostContainer = () => {
         fetch('http://localhost:4000/posts')
         .then(r => r.json())
         .then((json) => {
-            // json.reverse()
             setPosts(json)
             // console.log("use effect")
+            setTimeout(() => {
+                setIsFetching(false)
+            }, 1500)
         })
     }, [])
 
@@ -58,26 +68,28 @@ const PostContainer = () => {
     }, [isFetching])
 
     const fetchMorePosts = () => {
-        console.log("fetchmoreposts")
-        setTimeout(() => {
-            fetch(`http://localhost:4000/posts/${posts[posts.length - 1].id}`)
-            .then(r => r.json())
-            .then((json) => {
-                // console.log(json)
-                setPosts([
-                    ...posts,
-                    ...json
-                ])
-            })
+        // console.log("fetchmoreposts")
+        if (posts.length > 0) {
+            setTimeout(() => {
+                fetch(`http://localhost:4000/posts/${posts[posts.length - 1].id}`)
+                .then(r => r.json())
+                .then((json) => {
+                    console.log(json)
+                    setPosts([
+                        ...posts,
+                        ...json
+                    ])
+                    setTimeout(() => {
+                        setIsFetching(false)
+                    }, 1500)
+                })
 
-            // fetch more and setPosts 
-
-            setIsFetching(false)
-        }, 2000)
+            }, 2000)
+        }   
     }
 
     function handleScroll() {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+        if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight) return;
         setIsFetching(true);
       }
 
@@ -91,12 +103,22 @@ const PostContainer = () => {
         })
     }
 
+    const addPostToFrontOfArray = (newPost) => {
+        setPosts([
+            ...newPost,
+            ...posts
+        ])
+    }
+
     return (
-        <div className={classes.root}>
-            <Grid container spacing={3}>
+        <div className={classes.root} >
+            <Grid container spacing={3}  >
                 {mapAllPosts()}
             </Grid>
-            {isFetching && 'Grabbing moar kittens...'}
+            {isFetching && (
+            <div className={classes.root}>
+                <CircularProgress />
+            </div>)}
         </div>
     )
 

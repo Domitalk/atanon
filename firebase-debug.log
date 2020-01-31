@@ -1,0 +1,28 @@
+[debug] [2020-01-31T19:59:16.590Z] ----------------------------------------------------------------------
+[debug] [2020-01-31T19:59:16.592Z] Command:       /usr/local/Cellar/node/13.1.0/bin/node /usr/local/bin/firebase projects:create
+[debug] [2020-01-31T19:59:16.592Z] CLI Version:   7.12.1
+[debug] [2020-01-31T19:59:16.592Z] Platform:      darwin
+[debug] [2020-01-31T19:59:16.592Z] Node Version:  v13.1.0
+[debug] [2020-01-31T19:59:16.593Z] Time:          Fri Jan 31 2020 14:59:16 GMT-0500 (Eastern Standard Time)
+[debug] [2020-01-31T19:59:16.593Z] ----------------------------------------------------------------------
+[debug] [2020-01-31T19:59:16.593Z] 
+[debug] [2020-01-31T19:59:16.598Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-01-31T19:59:16.598Z] > authorizing via signed-in user
+[debug] [2020-01-31T19:59:25.276Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects  
+
+[debug] [2020-01-31T19:59:25.738Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-31T19:59:25.741Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.5190599342798256700  
+ 
+[debug] [2020-01-31T19:59:26.348Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-31T19:59:26.851Z] [Project Creation Poller] Retrying task index 0
+[debug] [2020-01-31T19:59:26.851Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.5190599342798256700  
+ 
+[debug] [2020-01-31T19:59:27.404Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-31T19:59:27.405Z] Callers must accept Terms of Service
+[debug] [2020-01-31T19:59:27.564Z] FirebaseError: Callers must accept Terms of Service
+    at OperationPoller.<anonymous> (/usr/local/lib/node_modules/firebase-tools/lib/operation-poller.js:31:23)
+    at Generator.next (<anonymous>)
+    at fulfilled (/usr/local/lib/node_modules/firebase-tools/lib/operation-poller.js:4:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[error] 
+[error] Error: Failed to create Google Cloud project. See firebase-debug.log for more info.
