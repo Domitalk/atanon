@@ -19,6 +19,8 @@ const PostContainer = () => {
 
     const [posts, setPosts] = useState([])
 
+    const [isFetching, setIsFetching] = useState(false)
+
     const addReaction = (newComment) => {
         fetch(`http://localhost:4000/reactions`, {
             method: 'POST', 
@@ -39,12 +41,45 @@ const PostContainer = () => {
         fetch('http://localhost:4000/posts')
         .then(r => r.json())
         .then((json) => {
-            json.reverse()
+            // json.reverse()
             setPosts(json)
             // console.log("use effect")
-
         })
     }, [])
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [])
+
+    useEffect(() => {
+        if (!isFetching) return; 
+        fetchMorePosts()
+    }, [isFetching])
+
+    const fetchMorePosts = () => {
+        console.log("fetchmoreposts")
+        setTimeout(() => {
+            fetch(`http://localhost:4000/posts/${posts[posts.length - 1].id}`)
+            .then(r => r.json())
+            .then((json) => {
+                // console.log(json)
+                setPosts([
+                    ...posts,
+                    ...json
+                ])
+            })
+
+            // fetch more and setPosts 
+
+            setIsFetching(false)
+        }, 2000)
+    }
+
+    function handleScroll() {
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+        setIsFetching(true);
+      }
 
     const mapAllPosts = () => {
         return posts.map((post) => {
@@ -61,6 +96,7 @@ const PostContainer = () => {
             <Grid container spacing={3}>
                 {mapAllPosts()}
             </Grid>
+            {isFetching && 'Grabbing moar kittens...'}
         </div>
     )
 
