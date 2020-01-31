@@ -29,7 +29,7 @@ const PostContainer = () => {
         })
         .then(r => r.json())
         .then((updatedPost) => {
-            console.log("adding reaction trigger")
+            // console.log("adding reaction trigger")
             let index = posts.findIndex(post => post.id === updatedPost.id)
             setPosts([...posts.slice(0, index), updatedPost, ...posts.slice(index + 1)])
         })
@@ -41,10 +41,10 @@ const PostContainer = () => {
         .then((json) => {
             json.reverse()
             setPosts(json)
-            console.log("use effect")
+            // console.log("use effect")
 
         })
-    })
+    }, [])
 
     const mapAllPosts = () => {
         return posts.map((post) => {

@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
 import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
@@ -18,19 +19,11 @@ const useStyles = makeStyles(() => ({
     root: {
       maxWidth: 304,
       margin: 'auto',
-      borderRadius: 0,
+      borderRadius: 30,
       position: 'relative',
     },
     content: {
       padding: 24,
-    },
-    cta: {
-      display: 'block',
-      textAlign: 'center',
-      color: '#fff',
-      letterSpacing: '3px',
-      fontWeight: 200,
-      fontSize: 12,
     },
     title: {
       color: '#fff',
