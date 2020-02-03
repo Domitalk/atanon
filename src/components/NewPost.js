@@ -15,7 +15,7 @@ const NewPost = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        fetch('http://localhost:4000/posts', {
+        fetch('https://atanon-api.herokuapp.com/posts', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,10 @@ const NewPost = (props) => {
     }
 
     return(
-        <div>
+        <div className="spaced">
+            <br>
+            </br>
+            
             <form onSubmit={handleSubmit}>
                 <input name="image_url" value={image_url} onChange={handleChange} />
                 <input name="comment" value={comment} onChange={handleChange} />

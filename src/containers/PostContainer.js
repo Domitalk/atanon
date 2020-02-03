@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
+      spacing: 8,
     },
     paper: {
       padding: theme.spacing(2),
@@ -30,7 +30,7 @@ const PostContainer = () => {
     const [isFetching, setIsFetching] = useState(true)
 
     const addReaction = (newComment) => {
-        fetch(`http://localhost:4000/reactions`, {
+        fetch(`https://atanon-api.herokuapp.com/reactions`, {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ const PostContainer = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:4000/posts')
+        fetch('https://atanon-api.herokuapp.com/posts')
         .then(r => r.json())
         .then((json) => {
             setPosts(json)
@@ -59,7 +59,9 @@ const PostContainer = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => { 
+            window.removeEventListener('scroll', handleScroll);
+        }
     }, [])
 
     useEffect(() => {
@@ -68,10 +70,10 @@ const PostContainer = () => {
     }, [isFetching])
 
     const fetchMorePosts = () => {
-        // console.log("fetchmoreposts")
+        console.log("fetchmoreposts")
         if (posts.length > 0) {
             setTimeout(() => {
-                fetch(`http://localhost:4000/posts/${posts[posts.length - 1].id}`)
+                fetch(`https://atanon-api.herokuapp.com/${posts[posts.length - 1].id}`)
                 .then(r => r.json())
                 .then((json) => {
                     console.log(json)
@@ -88,15 +90,22 @@ const PostContainer = () => {
         }   
     }
 
-    function handleScroll() {
-        if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight) return;
+    const handleScroll = () => {
+        console.log("innerHeight", window.innerHeight)
+        console.log("document.scrollTop", document.documentElement.scrollTop)
+        console.log("document offsetheight", document.documentElement.offsetHeight)
+
+
+        if (window.innerHeight + window.scrollTop  > document.documentElement.offsetHeight ) return;
+
+        // if (window.innerHeight + document.documentElement.scrollTop  > document.documentElement.offsetHeight ) return;
         setIsFetching(true);
       }
 
     const mapAllPosts = () => {
         return posts.map((post) => {
             return (
-                <Grid item xs={12} sm={6} md={4} lg={4} >
+                <Grid item xs={12} sm={6} md={4} lg={4}  >
                     <Post className={classes.paper} key={post.id} post={post} addReaction={addReaction} />
                 </Grid>
             )
@@ -111,14 +120,17 @@ const PostContainer = () => {
     }
 
     return (
-        <div className={classes.root} >
-            <Grid container spacing={3}  >
-                {mapAllPosts()}
-            </Grid>
-            {isFetching && (
-            <div className={classes.root}>
-                <CircularProgress />
-            </div>)}
+        <div className={classes.root} className="spaced" >
+
+      
+                <Grid container spacing={4} >
+                    {mapAllPosts()}
+                </Grid>
+                {isFetching && (
+                <div className={classes.root}>
+                    <CircularProgress />
+                </div>)}
+
         </div>
     )
 

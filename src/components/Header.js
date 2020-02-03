@@ -7,8 +7,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 
-
-
 function Header (props) {
 
     const theme = createMuiTheme({
@@ -29,8 +27,8 @@ function Header (props) {
     };
 
     return (
-        <div>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        <div className="header" position="fixed" >
+            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
 
                 <ThemeProvider theme={theme}>
                     <Typography>@ANON</Typography>
@@ -42,6 +40,7 @@ function Header (props) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                
             >
             <MenuItem onClick={handleClose}><NavLink  
                 style={{

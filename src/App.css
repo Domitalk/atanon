@@ -38,3 +38,20 @@
 }
 
 
+.header {
+  position: fixed;
+  top: 0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  /* z-index: 1; */
+  background-color: white;
+  height: 6.7vh;
+}
+
+.spaced {
+  overflow: auto;
+  height: 93.3vh;
+  margin-top: 6.7vh;
+  /* background-color: black; */
+}
