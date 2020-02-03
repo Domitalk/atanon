@@ -3,6 +3,7 @@ import Post from '../components/Post'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,7 +28,7 @@ const PostContainer = () => {
 
     const [posts, setPosts] = useState([])
 
-    const [isFetching, setIsFetching] = useState(true)
+    // const [isFetching, setIsFetching] = useState(true)
 
     const addReaction = (newComment) => {
         fetch(`https://atanon-api.herokuapp.com/reactions`, {
@@ -51,29 +52,29 @@ const PostContainer = () => {
         .then((json) => {
             setPosts(json)
             // console.log("use effect")
-            setTimeout(() => {
-                setIsFetching(false)
-            }, 1500)
+            // setTimeout(() => {
+            //     setIsFetching(false)
+            // }, 1500)
         })
     }, [])
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => { 
-            window.removeEventListener('scroll', handleScroll);
-        }
-    }, [])
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => { 
+    //         window.removeEventListener('scroll', handleScroll);
+    //     }
+    // }, [])
 
-    useEffect(() => {
-        if (!isFetching) return; 
-        fetchMorePosts()
-    }, [isFetching])
+    // useEffect(() => {
+    //     if (!isFetching) return; 
+    //     fetchMorePosts()
+    // }, [isFetching])
 
     const fetchMorePosts = () => {
-        console.log("fetchmoreposts")
+        // console.log("fetchmoreposts")
         if (posts.length > 0) {
             setTimeout(() => {
-                fetch(`https://atanon-api.herokuapp.com/${posts[posts.length - 1].id}`)
+                fetch(`https://atanon-api.herokuapp.com/posts/${posts[posts.length - 1].id}`)
                 .then(r => r.json())
                 .then((json) => {
                     console.log(json)
@@ -81,26 +82,26 @@ const PostContainer = () => {
                         ...posts,
                         ...json
                     ])
-                    setTimeout(() => {
-                        setIsFetching(false)
-                    }, 1500)
+                    // setTimeout(() => {
+                    //     setIsFetching(false)
+                    // }, 1500)
                 })
 
             }, 2000)
         }   
     }
 
-    const handleScroll = () => {
-        console.log("innerHeight", window.innerHeight)
-        console.log("document.scrollTop", document.documentElement.scrollTop)
-        console.log("document offsetheight", document.documentElement.offsetHeight)
+    // const handleScroll = () => {
+    //     console.log("innerHeight", window.innerHeight)
+    //     console.log("document.scrollTop", document.documentElement.scrollTop)
+    //     console.log("document offsetheight", document.documentElement.offsetHeight)
 
 
-        if (window.innerHeight + window.scrollTop  > document.documentElement.offsetHeight ) return;
+    //     if (window.innerHeight + window.scrollTop  > document.documentElement.offsetHeight ) return;
 
-        // if (window.innerHeight + document.documentElement.scrollTop  > document.documentElement.offsetHeight ) return;
-        setIsFetching(true);
-      }
+    //     // if (window.innerHeight + document.documentElement.scrollTop  > document.documentElement.offsetHeight ) return;
+    //     setIsFetching(true);
+    //   }
 
     const mapAllPosts = () => {
         return posts.map((post) => {
@@ -122,14 +123,21 @@ const PostContainer = () => {
     return (
         <div className={classes.root} className="spaced" >
 
-      
+            <InfiniteScroll
+                    pageStart={0}
+                    loadMore={fetchMorePosts}
+                    hasMore={true || false}
+                    loader={<div className="loader" key={0}> <CircularProgress /></div>}
+                    useWindow={false}
+            >
                 <Grid container spacing={4} >
                     {mapAllPosts()}
                 </Grid>
-                {isFetching && (
+                {/* {isFetching && (
                 <div className={classes.root}>
                     <CircularProgress />
-                </div>)}
+                </div>)} */}
+            </InfiniteScroll>
 
         </div>
     )
