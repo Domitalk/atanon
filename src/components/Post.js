@@ -54,6 +54,7 @@ const Post = (props) => {
             <CardActionArea>
                 <CardContent className={styles.content} >
                     <Box
+                        // onClick={() => { }}
                         display={'flex'}
                         flexDirection={'column'}
                         alignItems={'center'}

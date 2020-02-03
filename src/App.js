@@ -5,6 +5,7 @@ import PostContainer from './containers/PostContainer'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import NewPost from './components/NewPost'
 import { makeStyles } from '@material-ui/core/styles';
+import {Image} from 'cloudinary-react';
 
 
 

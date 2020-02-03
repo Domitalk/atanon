@@ -27,9 +27,7 @@ const PostContainer = () => {
     const classes = useStyles();
 
     const [posts, setPosts] = useState([])
-
-    // const [isFetching, setIsFetching] = useState(true)
-
+    
     const addReaction = (newComment) => {
         fetch(`https://atanon-api.herokuapp.com/reactions`, {
             method: 'POST', 
@@ -40,7 +38,6 @@ const PostContainer = () => {
         })
         .then(r => r.json())
         .then((updatedPost) => {
-            // console.log("adding reaction trigger")
             let index = posts.findIndex(post => post.id === updatedPost.id)
             setPosts([...posts.slice(0, index), updatedPost, ...posts.slice(index + 1)])
         })
@@ -51,24 +48,8 @@ const PostContainer = () => {
         .then(r => r.json())
         .then((json) => {
             setPosts(json)
-            // console.log("use effect")
-            // setTimeout(() => {
-            //     setIsFetching(false)
-            // }, 1500)
         })
     }, [])
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => { 
-    //         window.removeEventListener('scroll', handleScroll);
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     if (!isFetching) return; 
-    //     fetchMorePosts()
-    // }, [isFetching])
 
     const fetchMorePosts = () => {
         // console.log("fetchmoreposts")
@@ -82,26 +63,12 @@ const PostContainer = () => {
                         ...posts,
                         ...json
                     ])
-                    // setTimeout(() => {
-                    //     setIsFetching(false)
-                    // }, 1500)
                 })
 
             }, 2000)
         }   
     }
 
-    // const handleScroll = () => {
-    //     console.log("innerHeight", window.innerHeight)
-    //     console.log("document.scrollTop", document.documentElement.scrollTop)
-    //     console.log("document offsetheight", document.documentElement.offsetHeight)
-
-
-    //     if (window.innerHeight + window.scrollTop  > document.documentElement.offsetHeight ) return;
-
-    //     // if (window.innerHeight + document.documentElement.scrollTop  > document.documentElement.offsetHeight ) return;
-    //     setIsFetching(true);
-    //   }
 
     const mapAllPosts = () => {
         return posts.map((post) => {
@@ -133,10 +100,6 @@ const PostContainer = () => {
                 <Grid container spacing={4} >
                     {mapAllPosts()}
                 </Grid>
-                {/* {isFetching && (
-                <div className={classes.root}>
-                    <CircularProgress />
-                </div>)} */}
             </InfiniteScroll>
 
         </div>
