@@ -35,12 +35,26 @@ const NewPost = (props) => {
     }
 
     let widget = window.cloudinary.createUploadWidget({ 
-        cloudName: "demo", 
-        uploadPreset: "preset1" }, 
-        (error, result) => { });
+        cloudName: "dwazq8zps", 
+        uploadPreset: "zvziodpl" }, 
+        (error, result) => { 
+            // console.log("result event", result)
+            // console.log("error event", error)
+            checkUploadResult(result, error)
+        });
     
     const showWidget = () => {
         widget.open()
+    }
+
+    const checkUploadResult = (resultEvent, errorEvent) => {
+        if (resultEvent.event === 'success') {
+            console.log("photo url", resultEvent.info.secure_url)
+            setImage_url(`${resultEvent.info.secure_url}`)
+        }
+
+        // use the hook to setImage_url 
+        
     }
 
     return(

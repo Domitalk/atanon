@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
       },
   }));
 
-const PostContainer = () => {
+const PostContainer = (props) => {
     const classes = useStyles();
 
     const [posts, setPosts] = useState([])
@@ -82,7 +82,7 @@ const PostContainer = () => {
 
     const addPostToFrontOfArray = (newPost) => {
         setPosts([
-            ...newPost,
+            newPost,
             ...posts
         ])
     }
