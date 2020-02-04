@@ -44,7 +44,7 @@ const NewPost = (props) => {
                 // console.log("after post json", json)
                 props.addPostToFrontOfArray(json)
                 // redirect to main page when upload finished
-                props.history.push('/');
+                props.history.push('/atanon/');
             })
         }
     }
