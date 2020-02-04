@@ -35,14 +35,15 @@ const Post = (props) => {
     const mediaStyles = useCoverCardMediaStyles();
     const shadowStyles = useLightTopShadowStyles();
 
+    // create a reaction 
     const handleClick = (number) => {
-        console.log(number)
-
-        props.addReaction({
-            post_id: props.post.id, 
-            rtype: number
-        })
-
+        // console.log(number)
+        if (props.post.id) {
+            props.addReaction({
+                post_id: props.post.id, 
+                rtype: number
+            })
+        }
     }
 
     return (
