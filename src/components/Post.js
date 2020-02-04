@@ -6,13 +6,17 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Slide from '@material-ui/core/Slide';
+import { SvgIcon } from '@material-ui/core';
+
+
 
 import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 304,
       margin: 'auto',
@@ -34,6 +38,12 @@ const Post = (props) => {
     const styles = useStyles();
     const mediaStyles = useCoverCardMediaStyles();
     const shadowStyles = useLightTopShadowStyles();
+    const [checked, setChecked] = React.useState(false);
+
+    const flashAfter = () => {
+        setChecked(prev => !prev);
+        setTimeout(() => { setChecked(prev => !prev) }, 2000)
+    }
 
     // create a reaction 
     const handleClick = (number) => {
@@ -44,6 +54,7 @@ const Post = (props) => {
                 rtype: number
             })
         }
+        flashAfter()
     }
 
     return (
@@ -65,24 +76,23 @@ const Post = (props) => {
                         textAlign={'center'}
                     >
                         <h1 className={styles.title}>{props.post.comment}</h1>
-                        
-                        {/* <Typography variant="body2" color="textSecondary" component="p">
-                            {props.post.comment}
-                        </Typography> */}
+                        <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+                            {/* put something to slide up and down here  */}
+                        </Slide>
                     </Box>
                 </CardContent>
             </CardActionArea>
-            <CardActions >
-                <Button value="1" size="small" name="1" onClick={() => handleClick(1)}>
+            <CardActions className="reactionBox" >
+                <Button className="order" value="1" size="small" name="1" onClick={() => handleClick(1)}>
                     {props.post.heart} ❤️
                 </Button>
-                <Button size="small" name="2" onClick={() => handleClick(2)}>
+                <Button className="order" size="small" name="2" onClick={() => handleClick(2)}>
                     {props.post.smile} 😊
                 </Button>
-                <Button size="small" name="3" onClick={() => handleClick(3)}>
+                <Button className="order" size="small" name="3" onClick={() => handleClick(3)}>
                     {props.post.sad} 😔
                 </Button>
-                <Button size="small" name="4" onClick={() => handleClick(4)}>
+                <Button className="order" size="small" name="4" onClick={() => handleClick(4)}>
                     {props.post.angry} 😠
                 </Button>
             </CardActions> 

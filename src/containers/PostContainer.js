@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
 
+
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
           marginTop: theme.spacing(2),
         },
       },
+  
   }));
 
 const PostContainer = (props) => {
@@ -30,7 +32,7 @@ const PostContainer = (props) => {
         return props.posts.map((post) => {
             return (
                 <Grid item xs={12} sm={6} md={4} lg={4}  >
-                    <Post className={classes.paper} key={post.id} post={post} addReaction={props.addReaction} />
+                    <Post className={classes.paper} key={post.id} post={post} addReaction={props.addReaction}  />
                 </Grid>
             )
         })
@@ -38,7 +40,6 @@ const PostContainer = (props) => {
 
     return (
         <div className={classes.root} className="spaced" >
-
             <InfiniteScroll
                     pageStart={0}
                     loadMore={props.fetchMorePosts}
@@ -50,7 +51,6 @@ const PostContainer = (props) => {
                     {mapAllPosts()}
                 </Grid>
             </InfiniteScroll>
-
         </div>
     )
 
