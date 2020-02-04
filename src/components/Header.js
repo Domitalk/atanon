@@ -50,7 +50,7 @@ function Header (props) {
                     textDecoration: "none",
                     fontWeight: "bold",
                     color: "black"
-                }} exact to="/"> HOME 
+                }} exact to="/atanon/"> HOME 
             </NavLink></MenuItem>
             <MenuItem onClick={handleClose}><NavLink 
                 style={{
@@ -61,7 +61,7 @@ function Header (props) {
                     fontWeight: "bold",
                     color: "black"
                 }}
-                exact to="/post"> UPLOAD 
+                exact to="/atanon/post"> UPLOAD 
             </NavLink></MenuItem>
             </Menu>
         </div>

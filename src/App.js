@@ -64,7 +64,7 @@ function App() {
       <div className="App" >
         <Header />
         <Route 
-          exact path='/' 
+          exact path='/atanon/' 
           render={(props) => {
             return (
               <PostContainer {...props} 
@@ -75,7 +75,7 @@ function App() {
             )}}
         />
         <Route 
-          exact path='/post' 
+          exact path='/atanon/post' 
           render={(props) => {
             return (
               <NewPost {...props} 
