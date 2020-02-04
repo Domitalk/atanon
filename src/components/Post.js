@@ -47,7 +47,7 @@ const Post = (props) => {
     }
 
     return (
-        <Card className={cx(styles.root, shadowStyles.root)}>
+        <Card  className={cx(styles.root, shadowStyles.root)}>
             <CardMedia
                 classes={mediaStyles} 
                 image={props.post.image_url}
@@ -72,7 +72,7 @@ const Post = (props) => {
                     </Box>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions >
                 <Button value="1" size="small" name="1" onClick={() => handleClick(1)}>
                     {props.post.heart} ❤️
                 </Button>

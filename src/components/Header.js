@@ -28,7 +28,7 @@ function Header (props) {
 
     return (
         <div className="header" position="fixed" >
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
+            <Button className="logo" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
 
                 <ThemeProvider theme={theme}>
                     <Typography>@ANON</Typography>
