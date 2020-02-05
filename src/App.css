@@ -12,10 +12,15 @@
 .spaced {
   overflow: auto;
   height: 93.3vh;
-  margin-top: 6.7vh;
+  margin-top: 7.9vh;
+  /* width: 100%; */
+  padding: 9px; 
   /* background-color: black; */
 }
 
+.App {
+  width: 100%;
+}
 
 /* use for modal background */
 {

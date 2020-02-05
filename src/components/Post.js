@@ -7,20 +7,18 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
-import { SvgIcon } from '@material-ui/core';
-
-
 
 import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
-import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
+// import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
+import { useBouncyShadowStyles } from "@mui-treasury/styles/shadow/bouncy";
 
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 304,
       margin: 'auto',
-      borderRadius: 30,
+      borderRadius: 10,
       position: 'relative',
     },
     content: {
@@ -29,16 +27,26 @@ const useStyles = makeStyles((theme) => ({
     title: {
       color: '#fff',
       letterSpacing: '2px',
+      textShadow: "#260C0C 1px 0 10px", 
     },
+    likes: {
+        color: '#fff',
+        letterSpacing: '2px',
+        textShadow: "#260C0C 1px 0 10px", 
+    },
+    
   }));
 
 
 const Post = (props) => {
 
+
+    
     const styles = useStyles();
     const mediaStyles = useCoverCardMediaStyles();
-    const shadowStyles = useLightTopShadowStyles();
+    const shadowStyles = useBouncyShadowStyles();
     const [checked, setChecked] = React.useState(false);
+    const [emotion, setEmotion] = React.useState('')
 
     const flashAfter = () => {
         setChecked(prev => !prev);
@@ -48,25 +56,54 @@ const Post = (props) => {
     // create a reaction 
     const handleClick = (number) => {
         // console.log(number)
+        // setEmotion(number)
+
+        switch (number) {
+            case 1:
+                // setEmotion('❤️')
+                // setEmotion("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/smiling-face-with-heart-eyes.png")
+            case 2: 
+                // setEmotion('😊')
+                // setEmotion('https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/smiling-face-with-open-mouth-and-smiling-eyes.png')
+            case 3: 
+                // setEmotion('😔')
+                // setEmotion("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/crying-face.png")
+            case 4: 
+                // setEmotion('😠')
+                // setEmotion("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/angry-face.png")
+        }
+
+
         if (props.post.id) {
             props.addReaction({
                 post_id: props.post.id, 
                 rtype: number
             })
+            flashAfter()
         }
-        flashAfter()
     }
 
+    const returnFlash = () => {
+        return (
+            <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+                <span>{emotion}</span>
+            </Slide> 
+        )
+    }
+
+
     return (
-        <Card  className={cx(styles.root, shadowStyles.root)}>
-            <CardMedia
+        <Card variant="outlined"  className={cx(styles.root, shadowStyles.root)}>
+             <CardMedia 
                 classes={mediaStyles} 
                 image={props.post.image_url}
             />
             <CardActionArea>
                 <CardContent className={styles.content} >
+                     
                     <Box
                         // onClick={() => { }}
+                        
                         display={'flex'}
                         flexDirection={'column'}
                         alignItems={'center'}
@@ -76,24 +113,23 @@ const Post = (props) => {
                         textAlign={'center'}
                     >
                         <h1 className={styles.title}>{props.post.comment}</h1>
-                        <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
-                            {/* put something to slide up and down here  */}
-                        </Slide>
+                        {/* {returnFlash()}   */}
+
                     </Box>
                 </CardContent>
             </CardActionArea>
             <CardActions className="reactionBox" >
-                <Button className="order" value="1" size="small" name="1" onClick={() => handleClick(1)}>
-                    {props.post.heart} ❤️
+                <Button variant={'outlined'} color={'secondary'} className="order" value="1" size="small" name="1" onClick={() => handleClick(1)}>
+                    <span className={styles.likes}>{props.post.heart}</span> ❤️
                 </Button>
-                <Button className="order" size="small" name="2" onClick={() => handleClick(2)}>
-                    {props.post.smile} 😊
+                <Button variant={'outlined'} color={'secondary'} className="order" size="small" name="2" onClick={() => handleClick(2)}>
+                <span className={styles.likes}>{props.post.smile}</span> 😊
                 </Button>
-                <Button className="order" size="small" name="3" onClick={() => handleClick(3)}>
-                    {props.post.sad} 😔
+                <Button variant={'outlined'} color={'secondary'} className="order" size="small" name="3" onClick={() => handleClick(3)}>
+                <span className={styles.likes}>{props.post.sad}</span> 😔
                 </Button>
-                <Button className="order" size="small" name="4" onClick={() => handleClick(4)}>
-                    {props.post.angry} 😠
+                <Button variant={'outlined'} color={'secondary'} className="order" size="small" name="4" onClick={() => handleClick(4)}>
+                <span className={styles.likes}>{props.post.angry}</span> 😠
                 </Button>
             </CardActions> 
         </Card> 

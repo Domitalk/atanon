@@ -27,10 +27,9 @@ function Header (props) {
     };
 
     return (
-        <div className="header" position="fixed" >
-            <Button className="logo" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
-
-                <ThemeProvider theme={theme}>
+        <div  className="header" position="fixed"  >
+            <Button variant={'outlined'} color={'primary'} className="logo" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
+                <ThemeProvider  theme={theme}>
                     <Typography>@ANON</Typography>
                 </ThemeProvider>
             </Button>
