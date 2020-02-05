@@ -1,13 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
+import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
 
 function Header (props) {
+    const styles = useGradientBtnStyles();
 
     const theme = createMuiTheme({
         typography: {
@@ -28,12 +29,14 @@ function Header (props) {
 
     return (
         <div  className="header" position="fixed"  >
-            <Button variant={'outlined'} color={'primary'} className="logo" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
+            <Button classes={styles} variant={'outlined'} color={'primary'} className="logo" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
                 <ThemeProvider  theme={theme}>
-                    <Typography>@ANON</Typography>
+                    <Link exact to="/atanon" style={{ textDecoration: 'inherit', color: 'inherit'}}>
+                        <Typography>@ANON</Typography>
+                    </Link>
                 </ThemeProvider>
             </Button>
-            <Menu
+            {/* <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
                 keepMounted
@@ -61,8 +64,8 @@ function Header (props) {
                     color: "black"
                 }}
                 exact to="/atanon/post"> UPLOAD 
-            </NavLink></MenuItem>
-            </Menu>
+            </NavLink></MenuItem> */}
+            {/* </Menu> */}
         </div>
     )
 

@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  top: 0;
+  top: 0.5vh;
   text-align: center;
   display: block;
   width: 100%;
@@ -12,7 +12,7 @@
 .spaced {
   overflow: auto;
   height: 93.3vh;
-  margin-top: 7.9vh;
+  margin-top: 8.6vh;
   /* width: 100%; */
   padding: 9px; 
   /* background-color: black; */

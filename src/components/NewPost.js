@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Post from '../components/Post'
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+    },
+}));
 
 
 const NewPost = (props) => {
+    const classes = useStyles();
+
     // controlled form fields
     const [image_url, setImage_url] = useState("")
     const [comment, setComment] = useState("")
@@ -71,21 +81,32 @@ const NewPost = (props) => {
     }
 
     return(
-        <div className="spaced">
+        <div className="spaced" className={classes.root}>
             <br></br>
-            <h2>Preview</h2>
-            <Post post={post} /> 
-
-            <form onSubmit={handleSubmit}>
-                <h3>Image URL </h3>
-                <input type="url" name="image_url" value={image_url} onChange={handleChange} />
-                <h3>Or Upload</h3>
-                <button onClick={showWidget}>Upload Your Own Photo</button>
-                <h3>Comment</h3>
-                <textarea name="comment" value={comment} onChange={handleChange} />
-                <br></br>
-                <input type="submit" />
-            </form>
+            <Grid container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                spacing={9}
+            > 
+                <Grid item>
+                    <br></br>
+                    <h2>Preview</h2>
+                    <Post post={post} /> 
+                </Grid>
+                <Grid item >
+                    <form onSubmit={handleSubmit}>
+                        <h3>Image URL </h3>
+                        <input type="url" name="image_url" value={image_url} onChange={handleChange} />
+                        <h3>Or Upload</h3>
+                        <button onClick={showWidget}>Upload Your Own Photo</button>
+                        <h3>Comment</h3>
+                        <textarea name="comment" value={comment} onChange={handleChange} />
+                        <br></br>
+                        <input type="submit" />
+                    </form>
+                </Grid>
+            </Grid>
         </div>
     )
 
