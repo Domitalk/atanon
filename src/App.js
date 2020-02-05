@@ -68,6 +68,12 @@ function App(props) {
         setPosts(json)
     })
   }, [])
+  // refresh route back to main b/c upload widget errors
+  useEffect(() => {
+    if (window.performance) {
+      window.location = "https://domitalk.github.io/atanon/"
+    }
+  }, [])
   // infinitescroll fetch more posts, pass down to PostContainer
   const fetchMorePosts = () => {
     // console.log("fetchmoreposts")
