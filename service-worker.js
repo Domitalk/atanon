@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/atanon/precache-manifest.433d0f661742ed5e4e91dc3c7bb71725.js"
+  "/atanon/precache-manifest.a90fd7d0e8e2d19bc4a528faec02c57d.js"
 );
 
 self.addEventListener('message', (event) => {
