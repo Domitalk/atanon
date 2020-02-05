@@ -6,12 +6,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
-
 import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
-// import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
 import { useBouncyShadowStyles } from "@mui-treasury/styles/shadow/bouncy";
 
 const useStyles = makeStyles((theme) => ({

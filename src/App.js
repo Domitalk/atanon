@@ -38,13 +38,17 @@ const useStyles = makeStyles(theme => ({
 
 
 function App(props) {
+
   // make the button rounded gradient
   const chubbyStyles = useGradientBtnStyles({ chubby: true });
-  const [open, setOpen] = React.useState(true);
 
+  // variable for introduction modal 
+  const [open, setOpen] = React.useState(true);
   const classes = useStyles();
+
   // main collection of posts
   const [posts, setPosts] = useState([])
+
   // pass down method in order to create reaction 
   const addReaction = (newComment) => {
     fetch(`https://atanon-api.herokuapp.com/reactions`, {
@@ -60,20 +64,18 @@ function App(props) {
         setPosts([...posts.slice(0, index), updatedPost, ...posts.slice(index + 1)])
     })
   }
+
   // componentDidMount, fetch of data for initial rendering on homepage
   useEffect(() => {
+    // console.log("Startup")
     fetch('https://atanon-api.herokuapp.com/posts')
     .then(r => r.json())
     .then((json) => {
+        // console.log(json)
         setPosts(json)
     })
   }, [])
-  // refresh route back to main b/c upload widget errors
-  useEffect(() => {
-    if (window.performance) {
-      window.location = "https://domitalk.github.io/atanon/"
-    }
-  }, [])
+  
   // infinitescroll fetch more posts, pass down to PostContainer
   const fetchMorePosts = () => {
     // console.log("fetchmoreposts")
@@ -100,12 +102,11 @@ function App(props) {
         ...posts
     ])
   }
-
+ 
+  // handle closing introduction modal 
   const handleClose = () => {
     setOpen(false);
   };
-
-
 
   return (
     <Router>
@@ -131,7 +132,8 @@ function App(props) {
           </Fade>
         </Modal>
         <Route 
-          exact path='/atanon/' 
+          exact
+          path='/(|atanon)' 
           render={(props) => {
             return (
               <PostContainer {...props} 
@@ -141,6 +143,7 @@ function App(props) {
               />
             )}}
         />
+
         <Route 
           exact path='/atanon/post' 
           render={(props) => {
@@ -151,7 +154,7 @@ function App(props) {
             )
           }}
         />
-        <Fab classes={chubbyStyles}  color="secondary.main" aria-label="add" className={classes.fabButton}>
+        <Fab classes={chubbyStyles}  aria-label="add" className={classes.fabButton}>
           <NavLink exact to="/atanon/post" style={{ textDecoration: 'inherit', color: 'inherit'}} > 
             <AddIcon  /> 
           </NavLink>

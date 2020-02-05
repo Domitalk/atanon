@@ -16,20 +16,21 @@ function Header (props) {
           htmlFontSize: 8,
         },
     });
+
     // toggle header menu 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    // const [anchorEl, setAnchorEl] = React.useState(null);
     
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget);
-    };
+    // const handleClick = event => {
+    //     setAnchorEl(event.currentTarget);
+    // };
     
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
 
     return (
         <div  className="header" position="fixed"  >
-            <Button classes={styles} variant={'outlined'} color={'primary'} className="logo" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
+            <Button classes={styles} variant={'outlined'} color={'primary'} className="logo" aria-controls="simple-menu" aria-haspopup="true"  >
                 <ThemeProvider  theme={theme}>
                     <Link exact to="/atanon" style={{ textDecoration: 'inherit', color: 'inherit'}}>
                         <Typography>@ANON</Typography>

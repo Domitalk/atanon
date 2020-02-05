@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Post from '../components/Post'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,11 +36,13 @@ const NewPost = (props) => {
     // controlled form fields
     const [image_url, setImage_url] = useState("")
     const [comment, setComment] = useState("")
+
     // object to be sent to front of main state so image shows up immediately
     let post = {
         image_url, 
         comment
     }
+
     // controlled form handler
     const handleChange = (event) => {
         if (event.target.name === "image_url") {
@@ -49,6 +51,7 @@ const NewPost = (props) => {
             setComment(event.target.value)
         }
     }
+
     // fetch to create new post
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -77,6 +80,7 @@ const NewPost = (props) => {
             })
         }
     }
+
     // image upload widget
     let widget = window.cloudinary.createUploadWidget({ 
         cloudName: "dwazq8zps", 
@@ -86,10 +90,12 @@ const NewPost = (props) => {
             // console.log("error event", error)
             checkUploadResult(result, error)
         });
+
     // to render the widget 
     const showWidget = () => {
         widget.open()
     }
+
     // a check on whether the widget uploaded image
     const checkUploadResult = (resultEvent, errorEvent) => {
         if (resultEvent.event === 'success') {

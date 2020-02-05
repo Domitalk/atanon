@@ -2,7 +2,6 @@ import React from 'react'
 import Post from '../components/Post'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-// import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -29,8 +28,10 @@ const useStyles = makeStyles(theme => ({
 
 const PostContainer = (props) => {
     const classes = useStyles();
+
     // render all the items in posts 
     const mapAllPosts = () => {
+        // console.log(props)
         return props.posts.map((post) => {
             return (
                 <Grid item xs={12} sm={6} md={4} lg={4}  >
@@ -43,11 +44,11 @@ const PostContainer = (props) => {
     return (
         <div className={classes.root} className="spaced" >
             <InfiniteScroll
-                    pageStart={0}
-                    loadMore={props.fetchMorePosts}
-                    hasMore={true || false}
-                    loader={<div className="loader" key={0}> <br></br><LinearProgress color="secondary" /><br></br></div>}
-                    useWindow={false}
+                pageStart={0}
+                loadMore={props.fetchMorePosts}
+                hasMore={true || false}
+                loader={<div className="loader" key={0}> <br></br><LinearProgress color="secondary" /><br></br></div>}
+                useWindow={false}
             >
                 <Grid container spacing={4} >
                     {mapAllPosts()}
