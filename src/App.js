@@ -7,24 +7,40 @@ import NewPost from './components/NewPost'
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom'
 import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
   fabButton: {
-    position: 'absolute',
+    position: 'fixed',
     zIndex: 1,
-    top: '90vh',
-    right: '5vh',
+    top: '85vh',
+    right: '5vw',
     margin: '0 auto',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #ff8a65',
+    boxShadow: theme.shadows[0],
+    padding: theme.spacing(2, 4, 3),
+    outline: 0
   },
 }));
 
 
 function App(props) {
-
+  // make the button rounded gradient
   const chubbyStyles = useGradientBtnStyles({ chubby: true });
+  const [open, setOpen] = React.useState(true);
 
   const classes = useStyles();
   // main collection of posts
@@ -79,10 +95,35 @@ function App(props) {
     ])
   }
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+
   return (
     <Router>
       <div className="App" >
-        <Header display={{ xs: 'block', sm: 'block', md: 'none', lg: 'none', xl: 'none' }} />
+        <Header />
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper} onClick={handleClose} >
+              <h2 id="transition-modal-title">Welcome to @ANON</h2>
+              <p id="transition-modal-description">Where you can post and react anonymously</p>
+            </div>
+          </Fade>
+        </Modal>
         <Route 
           exact path='/atanon/' 
           render={(props) => {
@@ -104,7 +145,7 @@ function App(props) {
             )
           }}
         />
-        <Fab classes={chubbyStyles} display={{ xs: 'block', sm: 'block', md: 'none', lg: 'none', xl: 'none' }} color="secondary.main" aria-label="add" className={classes.fabButton}>
+        <Fab classes={chubbyStyles}  color="secondary.main" aria-label="add" className={classes.fabButton}>
           <NavLink exact to="/atanon/post" style={{ textDecoration: 'inherit', color: 'inherit'}} > 
             <AddIcon  /> 
           </NavLink>

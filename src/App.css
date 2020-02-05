@@ -2,16 +2,17 @@
   position: fixed;
   top: 0.5vh;
   text-align: center;
-  display: block;
+  /* display: block; */
   width: 100%;
-  /* z-index: 1; */
-  background-color: white;
-  height: 6.7vh;
+  z-index: 1;
+  /* background-color: white; */
+  /* height: 6.7vh; */
 }
 
 .spaced {
+  display: block;
   overflow: auto;
-  height: 93.3vh;
+  height: 100vh;
   margin-top: 8.6vh;
   /* width: 100%; */
   padding: 9px; 

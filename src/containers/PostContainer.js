@@ -2,8 +2,10 @@ import React from 'react'
 import Post from '../components/Post'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -44,7 +46,7 @@ const PostContainer = (props) => {
                     pageStart={0}
                     loadMore={props.fetchMorePosts}
                     hasMore={true || false}
-                    loader={<div className="loader" key={0}> <CircularProgress /></div>}
+                    loader={<div className="loader" key={0}> <br></br><LinearProgress color="secondary" /><br></br></div>}
                     useWindow={false}
             >
                 <Grid container spacing={4} >

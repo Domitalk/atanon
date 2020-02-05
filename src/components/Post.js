@@ -8,8 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 
-
-
 import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
@@ -41,58 +39,22 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Post = (props) => {
-
-
     
     const styles = useStyles();
     const mediaStyles = useCoverCardMediaStyles();
     const shadowStyles = useBouncyShadowStyles();
-    const [checked, setChecked] = React.useState(false);
-    const [emotion, setEmotion] = React.useState('')
-
-    const flashAfter = () => {
-        setChecked(prev => !prev);
-        setTimeout(() => { setChecked(prev => !prev) }, 2000)
-    }
 
     // create a reaction 
     const handleClick = (number) => {
         // console.log(number)
         // setEmotion(number)
-
-        switch (number) {
-            case 1:
-                // setEmotion('❤️')
-                // setEmotion("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/smiling-face-with-heart-eyes.png")
-            case 2: 
-                // setEmotion('😊')
-                // setEmotion('https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/smiling-face-with-open-mouth-and-smiling-eyes.png')
-            case 3: 
-                // setEmotion('😔')
-                // setEmotion("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/crying-face.png")
-            case 4: 
-                // setEmotion('😠')
-                // setEmotion("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/angry-face.png")
-        }
-
-
         if (props.post.id) {
             props.addReaction({
                 post_id: props.post.id, 
                 rtype: number
             })
-            flashAfter()
         }
     }
-
-    const returnFlash = () => {
-        return (
-            <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
-                <span>{emotion}</span>
-            </Slide> 
-        )
-    }
-
 
     return (
         <Card variant="outlined"  className={cx(styles.root, shadowStyles.root)}>
@@ -104,8 +66,6 @@ const Post = (props) => {
                 <CardContent className={styles.content} >
                      
                     <Box
-                        // onClick={() => { }}
-                        
                         display={'flex'}
                         flexDirection={'column'}
                         alignItems={'center'}
@@ -115,8 +75,6 @@ const Post = (props) => {
                         textAlign={'center'}
                     >
                         <h1 className={styles.title}>{props.post.comment}</h1>
-                        {/* {returnFlash()}   */}
-
                     </Box>
                 </CardContent>
             </CardActionArea>

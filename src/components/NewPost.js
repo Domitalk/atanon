@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Post from '../components/Post'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
 
+
+const useStylesCard = makeStyles({
+    root: {
+      maxWidth: '70vw',
+    },
+  });
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,9 +18,20 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const useStylesForm = makeStyles(theme => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '67vw'
+      },
+    },
+  }));
+
 
 const NewPost = (props) => {
     const classes = useStyles();
+    const classesForm = useStylesForm();
+    const classesCard = useStylesCard();
 
     // controlled form fields
     const [image_url, setImage_url] = useState("")
@@ -95,16 +114,36 @@ const NewPost = (props) => {
                     <Post post={post} /> 
                 </Grid>
                 <Grid item >
-                    <form onSubmit={handleSubmit}>
-                        <h3>Image URL </h3>
-                        <input type="url" name="image_url" value={image_url} onChange={handleChange} />
-                        <h3>Or Upload</h3>
-                        <button onClick={showWidget}>Upload Your Own Photo</button>
-                        <h3>Comment</h3>
-                        <textarea name="comment" value={comment} onChange={handleChange} />
-                        <br></br>
-                        <input type="submit" />
-                    </form>
+                    <Card className={classesCard.root}>
+                        <form className={classesForm.root} onSubmit={handleSubmit} noValidate autoComplete="off">
+                            {/* <h3>Image URL </h3> */}
+                            {/* <input type="url" name="image_url" value={image_url} onChange={handleChange} /> */}
+                            <TextField 
+                                label="Image URL"
+                                type="url"
+                                name="image_url"
+                                value={image_url}
+                                onChange={handleChange}
+                                variant="filled"
+                                />
+                            {/* <h3>Or Upload</h3> */}
+                            <TextField 
+                                label="Comment"
+                                multiline
+                                type="text"
+                                name="comment"
+                                rows="5"
+                                value={comment}
+                                onChange={handleChange}
+                                variant="filled"
+                            />
+                            {/* <h3>Comment</h3>
+                            <textarea name="comment" value={comment} onChange={handleChange} /> */}
+                            {/* <br></br> */}
+                            <button onClick={showWidget}>Upload Your Own Photo</button>
+                            <input type="submit" />
+                        </form>
+                    </Card>
                 </Grid>
             </Grid>
         </div>
