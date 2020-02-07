@@ -4,7 +4,17 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
+import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
+import Box from '@material-ui/core/Box';
 
+const useStylesButton = makeStyles(theme => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+  }));
 
 const useStylesCard = makeStyles({
     root: {
@@ -32,10 +42,15 @@ const NewPost = (props) => {
     const classes = useStyles();
     const classesForm = useStylesForm();
     const classesCard = useStylesCard();
+    const classesButton = useStylesButton();
+
 
     // controlled form fields
     const [image_url, setImage_url] = useState("")
     const [comment, setComment] = useState("")
+
+    const styles = useGradientBtnStyles();
+
 
     // object to be sent to front of main state so image shows up immediately
     let post = {
@@ -147,8 +162,12 @@ const NewPost = (props) => {
                             {/* <h3>Comment</h3>
                             <textarea name="comment" value={comment} onChange={handleChange} /> */}
                             {/* <br></br> */}
-                            <button onClick={showWidget}>Upload Your Own Photo</button>
-                            <input type="submit" />
+                            <Box align="center" className={classesButton.root} >
+                                <Button onClick={showWidget} classes={styles}>Upload Your Own Photo</Button>
+                                {/* <button onClick={showWidget}>Upload Your Own Photo</button> */}
+                                <Button onClick={handleSubmit} classes={styles}>Submit Your Post</Button>
+                            {/* <input type="submit" /> */}
+                            </Box>
                         </form>
                     </Card>
                 </Grid>

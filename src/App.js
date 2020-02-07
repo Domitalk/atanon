@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react'
 import './App.css';
 import Header from './components/Header'
 import PostContainer from './containers/PostContainer'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import NewPost from './components/NewPost'
 import { makeStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom'
 import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-
-import Fab from '@material-ui/core/Fab';
+import {Fade, Fab, Backdrop, Modal} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
+import { useTagCardStyles } from '@mui-treasury/styles/cardContent/tag';
 
 const useStyles = makeStyles(theme => ({
   fabButton: {
@@ -36,14 +32,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 function App(props) {
 
   // make the button rounded gradient
   const chubbyStyles = useGradientBtnStyles({ chubby: true });
 
   // variable for introduction modal 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const classes = useStyles();
 
   // main collection of posts
@@ -71,7 +66,6 @@ function App(props) {
     fetch('https://atanon-api.herokuapp.com/posts')
     .then(r => r.json())
     .then((json) => {
-        // console.log(json)
         setPosts(json)
     })
   }, [])
@@ -102,7 +96,7 @@ function App(props) {
         ...posts
     ])
   }
- 
+
   // handle closing introduction modal 
   const handleClose = () => {
     setOpen(false);
@@ -131,6 +125,21 @@ function App(props) {
             </div>
           </Fade>
         </Modal>
+        {/* <Modal
+          open={detailOpen}
+          onClose={handleDetailClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={detailOpen}>
+
+
+
+          </Fade>
+        </Modal> */}
         <Route 
           exact
           path='/(|atanon)' 
@@ -143,7 +152,6 @@ function App(props) {
               />
             )}}
         />
-
         <Route 
           exact path='/atanon/post' 
           render={(props) => {
