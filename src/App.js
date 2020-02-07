@@ -122,6 +122,8 @@ function App(props) {
             <div className={classes.paper} onClick={handleClose} >
               <h2 id="transition-modal-title">Welcome to @ANON</h2>
               <p id="transition-modal-description">Where you can post and react anonymously</p>
+              <p id="transition-modal-description">If you double click/tap on a post you can add tags</p>
+
             </div>
           </Fade>
         </Modal>
