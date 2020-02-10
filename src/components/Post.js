@@ -110,10 +110,14 @@ const Post = (props) => {
     // show all the search tags as buttons 
     const showAllStags = () => {
         // console.log(Object.keys(props.post.stags))
-        let stagkeys = Object.keys(props.post.stags)
-        return stagkeys.map( key => {
-            return <Button className={classesStag.margin} color='secondary' size="large" variant={'outlined'}><span className={styles.likes}>{key}</span></Button>
-        })
+        if (props.post.id) {
+            let stagkeys = Object.keys(props.post.stags)
+            stagkeys.reverse()
+            let stagkeysshorter = stagkeys.slice(0, 5)
+            return stagkeysshorter.map( key => {
+                return <Button className={classesStag.margin} color='secondary' size="large" variant={'outlined'}><span className={styles.likes}>{key}</span></Button>
+            })
+        }
     }
 
 
