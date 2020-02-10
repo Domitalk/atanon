@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "74da118d3ad35f1313dd04e56d36cefd",
+    "revision": "bc5a927d8d6c3ed44b31d29eaceab948",
     "url": "/atanon/index.html"
   },
   {
-    "revision": "50386189ded3197f7d21",
+    "revision": "0e5a62d0a711894d4773",
     "url": "/atanon/static/css/main.6c53242a.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atanon/static/js/2.cab04e5c.chunk.js.LICENSE"
   },
   {
-    "revision": "50386189ded3197f7d21",
-    "url": "/atanon/static/js/main.dfbd5d2e.chunk.js"
+    "revision": "0e5a62d0a711894d4773",
+    "url": "/atanon/static/js/main.e72c4b64.chunk.js"
   },
   {
     "revision": "045c5b9ff2c48023aa34",
