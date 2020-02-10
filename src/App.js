@@ -102,6 +102,11 @@ function App(props) {
     setOpen(false);
   };
 
+  // Add a tag to a Post 
+  const addTagToPost = (newTag, post_id) => {
+
+  }
+
   return (
     <Router>
       <div className="App" >
@@ -127,21 +132,6 @@ function App(props) {
             </div>
           </Fade>
         </Modal>
-        {/* <Modal
-          open={detailOpen}
-          onClose={handleDetailClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={detailOpen}>
-
-
-
-          </Fade>
-        </Modal> */}
         <Route 
           exact
           path='/(|atanon)' 
@@ -151,6 +141,7 @@ function App(props) {
                 posts={posts} 
                 fetchMorePosts={fetchMorePosts}
                 addReaction={addReaction}
+                addTagToPost={addTagToPost}
               />
             )}}
         />

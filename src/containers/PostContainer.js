@@ -35,7 +35,7 @@ const PostContainer = (props) => {
         return props.posts.map((post) => {
             return (
                 <Grid item xs={12} sm={6} md={4} lg={4}  >
-                    <Post className={classes.paper} key={post.id} post={post} addReaction={props.addReaction}  />
+                    <Post className={classes.paper} key={post.id} post={post} addReaction={props.addReaction} addTagToPost={props.addTagToPost} />
                 </Grid>
             )
         })
