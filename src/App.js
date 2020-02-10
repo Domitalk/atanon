@@ -84,7 +84,6 @@ function App(props) {
                     ...json
                 ])
             })
-
         }, 2000)
     }   
   }
@@ -104,7 +103,21 @@ function App(props) {
 
   // Add a tag to a Post 
   const addTagToPost = (newTag, post_id) => {
-
+    fetch(`https://atanon-api.herokuapp.com/stags`, {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        post_id: post_id, 
+        stagname: newTag
+      })
+    })
+    .then(r => r.json())
+    .then((updatedPost) => {
+      let index = posts.findIndex(post => post.id === updatedPost.id)
+      setPosts([...posts.slice(0, index), updatedPost, ...posts.slice(index + 1)])
+    })
   }
 
   return (
