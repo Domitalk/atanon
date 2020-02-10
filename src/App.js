@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
   fabButton: {
     position: 'fixed',
     zIndex: 1,
-    top: '85vh',
-    right: '5vw',
+    bottom: '3vh',
+    right: '4vw',
     margin: '0 auto',
   },
   modal: {
