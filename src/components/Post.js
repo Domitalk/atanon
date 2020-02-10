@@ -179,7 +179,7 @@ const Post = (props) => {
                             className={classesStag.root}
                         >
                             {/* <div className={classesStag.root}> */}
-                                <h3 className={styles.title}>{showAllStags()}</h3>
+                                <h3 className={styles.title}>{props.post.id ? showAllStags: null }</h3>
                             {/* </div> */}
                         </Box>
                     </CardContent>
