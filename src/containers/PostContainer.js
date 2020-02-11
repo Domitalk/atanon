@@ -47,7 +47,9 @@ const PostContainer = (props) => {
                 pageStart={0}
                 loadMore={props.fetchMorePosts}
                 hasMore={true || false}
-                loader={<div className="loader" key={0}> <br></br><LinearProgress color="secondary" /><br></br></div>}
+                loader={<div className="loader" key={0}> <br></br>
+                    { props.canFetch? <LinearProgress color="secondary" /> : null }
+                    <br></br></div>}
                 useWindow={false}
             >
                 <Grid container spacing={4} >

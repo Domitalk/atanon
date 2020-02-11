@@ -132,7 +132,6 @@ const NewPost = (props) => {
             > 
                 <Grid item>
                     <br></br>
-                    <h1></h1>
                     <br></br>
                     <Post post={post} /> 
                 </Grid>

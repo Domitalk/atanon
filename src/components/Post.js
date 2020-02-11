@@ -110,14 +110,23 @@ const Post = (props) => {
     // show all the search tags as buttons 
     const showAllStags = () => {
         // console.log(Object.keys(props.post.stags))
-        if (props.post.id) {
-            let stagkeys = Object.keys(props.post.stags)
-            stagkeys.reverse()
-            let stagkeysshorter = stagkeys.slice(0, 5)
-            return stagkeysshorter.map( key => {
-                return <Button className={classesStag.margin} color='secondary' size="large" variant={'outlined'}><span className={styles.likes}>{key}</span></Button>
-            })
+        let sortedstags = []
+        for (var stag in props.post.stags) {
+            sortedstags.push([stag, props.post.stags[stag]])
         }
+        sortedstags.sort(function(a, b) {
+            return b[1] - a[1]
+        })
+
+        // console.log(sortedstags)
+        // let stagkeys = Object.keys(props.post.stags)
+        // stagkeys.reverse()
+        // console.log(stagkeys)
+        // let stagkeysshorter = stagkeys.slice(0, 5)
+        // console.log(props.post.stags, sortedstags)
+        return sortedstags.map(stag => {
+        return <Button key={stag[0]} className={classesStag.margin} color='secondary' size="large" variant={'outlined'}><span className={styles.likes}>{stag[0]} {stag[1] > 1 ? ` x${stag[1]}`:null}</span></Button>
+        })
     }
 
 
@@ -179,7 +188,7 @@ const Post = (props) => {
                             className={classesStag.root}
                         >
                             {/* <div className={classesStag.root}> */}
-                                <h3 className={styles.title}>{props.post.id ? showAllStags: null }</h3>
+                                <h3 className={styles.title}>{props.post.id ? showAllStags(): null }</h3>
                             {/* </div> */}
                         </Box>
                     </CardContent>

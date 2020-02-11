@@ -8,9 +8,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
 import {Fade, Fab, Backdrop, Modal} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
-import { useTagCardStyles } from '@mui-treasury/styles/cardContent/tag';
+
+import { useSearchInputStyles } from '@mui-treasury/styles/input/search';
+import Search from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
+
+
+
+
+
+
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    position: 'fixed',
+    zIndex: 1,
+    padding: '2px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    bottom: '3vh',
+    margin: '0 auto',
+    right: '20vw', 
+  },
+  
   fabButton: {
     position: 'fixed',
     zIndex: 1,
@@ -18,6 +38,7 @@ const useStyles = makeStyles(theme => ({
     right: '4vw',
     margin: '0 auto',
   },
+
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -43,6 +64,15 @@ function App(props) {
 
   // main collection of posts
   const [posts, setPosts] = useState([])
+  
+  const [showSearch, setShowSearch] = useState(false) 
+
+  const [searchTerms, setSearchTerms] = useState("")
+
+  const styles = useSearchInputStyles();
+
+  const [canFetch, setCanFetch] = useState(true)
+
 
   // pass down method in order to create reaction 
   const addReaction = (newComment) => {
@@ -73,18 +103,21 @@ function App(props) {
   // infinitescroll fetch more posts, pass down to PostContainer
   const fetchMorePosts = () => {
     // console.log("fetchmoreposts")
-    if (posts.length > 0) {
+    if (posts.length > 0 && canFetch) {
         setTimeout(() => {
             fetch(`https://atanon-api.herokuapp.com/posts/${posts[posts.length - 1].id}`)
             .then(r => r.json())
             .then((json) => {
-                console.log(json)
+              if (json.length > 0) {
                 setPosts([
                     ...posts,
                     ...json
                 ])
+              } else {
+                setCanFetch(false)
+              }
             })
-        }, 2000)
+        }, 1500)
     }   
   }
   // pass down to NewPost
@@ -120,10 +153,67 @@ function App(props) {
     })
   }
 
+  const handleSearchChange = (event) => {
+    setSearchTerms(event.target.value)
+  }
+
+  const filteredPosts = () => {
+    // let tempposts = [...posts]
+
+    // check to see if search field is relevant 
+    if (searchTerms.length > 2) {
+      setCanFetch(false)
+      return posts.filter(post => {
+        let searchable = false 
+        if(post.id) {
+          Object.keys(post.stags).forEach(stagname => {
+            if(stagname.toLowerCase().includes(searchTerms)) {
+              searchable = true 
+            }
+        })
+        if (searchable) {
+            return true 
+        } else {
+            return false
+        }
+        }
+      })
+
+    } else {
+      setCanFetch(true)
+      return posts 
+    }
+    // apply search 
+    // console.log(tempposts)
+    // return tempposts 
+  }
+
+  const clearSearchBar = () => {
+    setSearchTerms("")
+    setShowSearch(false)
+  }
+
+  const handleAddAfterSearch = () => {
+    setSearchTerms("")
+    setShowSearch(false)
+  }
+
   return (
     <Router>
       <div className="App" >
-        <Header />
+        <Header clearSearchBar={clearSearchBar} setShowSearch={setShowSearch} showSearch={showSearch} />
+        {showSearch? 
+        <div className={classes.root}>
+          <InputBase
+            classes={styles}
+            placeholder={'Search...'}
+            startAdornment={<Search />}
+            value={searchTerms} 
+            onChange={handleSearchChange}
+          />
+        </div>
+        // <div className={classes.root}><TextField  fullWidth value={searchTerms} onChange={handleSearchChange} variant="outlined"/><SearchIcon/></div> 
+        : null}
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
@@ -151,10 +241,11 @@ function App(props) {
           render={(props) => {
             return (
               <PostContainer {...props} 
-                posts={posts} 
+                posts={filteredPosts()} 
                 fetchMorePosts={fetchMorePosts}
                 addReaction={addReaction}
                 addTagToPost={addTagToPost}
+                canFetch={canFetch}
               />
             )}}
         />
@@ -168,7 +259,7 @@ function App(props) {
             )
           }}
         />
-        <Fab classes={chubbyStyles}  aria-label="add" className={classes.fabButton}>
+        <Fab onClick={handleAddAfterSearch} classes={chubbyStyles}  aria-label="add" className={classes.fabButton}>
           <NavLink exact to="/atanon/post" style={{ textDecoration: 'inherit', color: 'inherit'}} > 
             <AddIcon  /> 
           </NavLink>
