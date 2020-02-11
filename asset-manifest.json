@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/atanon/static/css/main.6c53242a.chunk.css",
-    "main.js": "/atanon/static/js/main.fc0dd7c6.chunk.js",
-    "main.js.map": "/atanon/static/js/main.fc0dd7c6.chunk.js.map",
+    "main.js": "/atanon/static/js/main.fed6792a.chunk.js",
+    "main.js.map": "/atanon/static/js/main.fed6792a.chunk.js.map",
     "runtime-main.js": "/atanon/static/js/runtime-main.6d1e2df4.js",
     "runtime-main.js.map": "/atanon/static/js/runtime-main.6d1e2df4.js.map",
-    "static/js/2.cab04e5c.chunk.js": "/atanon/static/js/2.cab04e5c.chunk.js",
-    "static/js/2.cab04e5c.chunk.js.map": "/atanon/static/js/2.cab04e5c.chunk.js.map",
+    "static/js/2.1eb9527f.chunk.js": "/atanon/static/js/2.1eb9527f.chunk.js",
+    "static/js/2.1eb9527f.chunk.js.map": "/atanon/static/js/2.1eb9527f.chunk.js.map",
     "index.html": "/atanon/index.html",
-    "precache-manifest.30c6cdc3e657c406b5139b55f312193e.js": "/atanon/precache-manifest.30c6cdc3e657c406b5139b55f312193e.js",
+    "precache-manifest.c9b1bf96893218ec7b0e8f12434140e3.js": "/atanon/precache-manifest.c9b1bf96893218ec7b0e8f12434140e3.js",
     "service-worker.js": "/atanon/service-worker.js",
     "static/css/main.6c53242a.chunk.css.map": "/atanon/static/css/main.6c53242a.chunk.css.map",
-    "static/js/2.cab04e5c.chunk.js.LICENSE": "/atanon/static/js/2.cab04e5c.chunk.js.LICENSE"
+    "static/js/2.1eb9527f.chunk.js.LICENSE": "/atanon/static/js/2.1eb9527f.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.6d1e2df4.js",
-    "static/js/2.cab04e5c.chunk.js",
+    "static/js/2.1eb9527f.chunk.js",
     "static/css/main.6c53242a.chunk.css",
-    "static/js/main.fc0dd7c6.chunk.js"
+    "static/js/main.fed6792a.chunk.js"
   ]
 }
