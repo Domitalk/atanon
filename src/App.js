@@ -167,7 +167,7 @@ function App(props) {
         let searchable = false 
         if(post.id) {
           Object.keys(post.stags).forEach(stagname => {
-            if(stagname.toLowerCase().includes(searchTerms)) {
+            if(stagname.toLowerCase().includes(searchTerms.toLowerCase())) {
               searchable = true 
             }
         })
