@@ -100,8 +100,7 @@ const NewPost = (props) => {
     // image upload widget
     let widget = window.cloudinary.createUploadWidget({ 
         cloudName: "dwazq8zps", 
-        uploadPreset: "zvziodpl",
-        cropping: true }, 
+        uploadPreset: "zvziodpl" }, 
         (error, result) => { 
             // console.log("result event", result)
             // console.log("error event", error)
