@@ -196,7 +196,7 @@ const NewPost = (props) => {
                             />
                             <Button onClick={rotateLeft} classes={styles}>Rotate</Button>
 
-                            <p>*While uploading on mobile, some cameras save at different angles than expected.</p>
+                            <p>*While uploading on mobile, some camera modes result in rotated images, please adjust accordingly with the rotate button.</p>
                             {/* <h3>Comment</h3>
                             <textarea name="comment" value={comment} onChange={handleChange} /> */}
                             {/* <br></br> */}

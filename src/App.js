@@ -8,6 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
 import {Fade, Fab, Backdrop, Modal} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
+import { createBrowserHistory } from "history";
+
 
 import { useSearchInputStyles } from '@mui-treasury/styles/input/search';
 import Search from '@material-ui/icons/Search';
@@ -48,6 +50,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App(props) {
+
+  let history = createBrowserHistory()
 
   // make the button rounded gradient
   const chubbyStyles = useGradientBtnStyles({ chubby: true });
@@ -92,6 +96,15 @@ function App(props) {
     .then((json) => {
         setPosts(json)
     })
+
+    // console.log("pathname", history.location.pathname)
+
+    // console.log("props", props.history)
+    // if (window.performance) {
+    //   if (performance.navigation.type == 1 && history.location.pathname === '/atanon/post') {
+    //     history.push('/')
+    //   } 
+    // }
   }, [])
   
   // infinitescroll fetch more posts, pass down to PostContainer
