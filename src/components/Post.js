@@ -125,10 +125,16 @@ const Post = (props) => {
         // let stagkeysshorter = stagkeys.slice(0, 5)
         // console.log(props.post.stags, sortedstags)
         return sortedstags.map(stag => {
-        return <Button key={stag[0]} className={classesStag.margin} color='secondary' size="large" variant={'outlined'}><span className={styles.likes}>{stag[0]} {stag[1] > 1 ? ` x${stag[1]}`:null}</span></Button>
+        return <Button key={stag[0]} name={stag[0]} onClick={() => {handleClickSearch(stag[0])}} className={classesStag.margin} color='secondary' size="large" variant={'outlined'}><span className={styles.likes}>{stag[0]} {stag[1] > 1 ? ` x${stag[1]}`:null}</span></Button>
         })
     }
 
+    const handleClickSearch = (stagname) => {
+        // console.log("testing", stagname)
+        props.setSearchTerms(stagname)
+        props.setShowSearch(true)
+
+    }
 
 
     return (

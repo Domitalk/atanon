@@ -100,7 +100,8 @@ const NewPost = (props) => {
     // image upload widget
     let widget = window.cloudinary.createUploadWidget({ 
         cloudName: "dwazq8zps", 
-        uploadPreset: "zvziodpl" }, 
+        uploadPreset: "zvziodpl",
+        cropping: true }, 
         (error, result) => { 
             // console.log("result event", result)
             // console.log("error event", error)
@@ -115,10 +116,34 @@ const NewPost = (props) => {
     // a check on whether the widget uploaded image
     const checkUploadResult = (resultEvent, errorEvent) => {
         if (resultEvent.event === 'success') {
-            console.log("photo url", resultEvent.info.secure_url)
+            // console.log("photo url", resultEvent.info.secure_url)
+            // let tempurl = resultEvent.info.secure_url
+            // let temparray = tempurl.split("/")
+            // let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
+            // temparray.splice(stringindex + 1, 0, "w_400/a_270")
+            // let newURL = temparray.join("/")
+            // setImage_url(`${newURL}`)
             setImage_url(`${resultEvent.info.secure_url}`)
         }
         // use the hook to setImage_url 
+    }
+
+    const rotateLeft = () => {
+        if (!image_url.includes("w_400/a_270")){
+            let tempurl = image_url 
+            let temparray = tempurl.split("/")
+            let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
+            temparray.splice(stringindex + 1, 0, "w_400/a_270")
+            let newURL = temparray.join("/")
+            setImage_url(`${newURL}`)
+        } else {
+            let tempurl = image_url 
+            let temparray = tempurl.split("/")
+            let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
+            temparray.splice(stringindex + 1, 2)
+            let newURL = temparray.join("/")
+            setImage_url(`${newURL}`)
+        }
     }
 
     return(
@@ -136,7 +161,7 @@ const NewPost = (props) => {
                     <Post post={post} /> 
                 </Grid>
                 <Grid item >
-                    <Card className={classesCard.root}>
+                    <Card align='center' className={classesCard.root}>
                         <form className={classesForm.root} onSubmit={handleSubmit} noValidate autoComplete="off">
                             {/* <h3>Image URL </h3> */}
                             {/* <input type="url" name="image_url" value={image_url} onChange={handleChange} /> */}
@@ -159,6 +184,9 @@ const NewPost = (props) => {
                                 onChange={handleChange}
                                 variant="filled"
                             />
+                            <Button onClick={rotateLeft} classes={styles}>Rotate Counter-clock</Button>
+
+                            <p>*While uploading on mobile, some cameras save at different angles than expected.</p>
                             {/* <h3>Comment</h3>
                             <textarea name="comment" value={comment} onChange={handleChange} /> */}
                             {/* <br></br> */}

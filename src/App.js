@@ -13,12 +13,6 @@ import { useSearchInputStyles } from '@mui-treasury/styles/input/search';
 import Search from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-
-
-
-
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
@@ -171,6 +165,11 @@ function App(props) {
               searchable = true 
             }
         })
+        if(post.id) {
+          if(post.comment.toLowerCase().includes(searchTerms.toLowerCase())) {
+            searchable = true 
+          }
+        }
         if (searchable) {
             return true 
         } else {
@@ -246,6 +245,8 @@ function App(props) {
                 addReaction={addReaction}
                 addTagToPost={addTagToPost}
                 canFetch={canFetch}
+                setSearchTerms={setSearchTerms}
+                setShowSearch={setShowSearch}
               />
             )}}
         />
