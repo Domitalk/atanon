@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/atanon/static/css/main.6c53242a.chunk.css",
-    "main.js": "/atanon/static/js/main.fed6792a.chunk.js",
-    "main.js.map": "/atanon/static/js/main.fed6792a.chunk.js.map",
+    "main.js": "/atanon/static/js/main.0488f862.chunk.js",
+    "main.js.map": "/atanon/static/js/main.0488f862.chunk.js.map",
     "runtime-main.js": "/atanon/static/js/runtime-main.6d1e2df4.js",
     "runtime-main.js.map": "/atanon/static/js/runtime-main.6d1e2df4.js.map",
     "static/js/2.1eb9527f.chunk.js": "/atanon/static/js/2.1eb9527f.chunk.js",
     "static/js/2.1eb9527f.chunk.js.map": "/atanon/static/js/2.1eb9527f.chunk.js.map",
     "index.html": "/atanon/index.html",
-    "precache-manifest.c9b1bf96893218ec7b0e8f12434140e3.js": "/atanon/precache-manifest.c9b1bf96893218ec7b0e8f12434140e3.js",
+    "precache-manifest.f0898c3ba48a2f82ae650053d096c18d.js": "/atanon/precache-manifest.f0898c3ba48a2f82ae650053d096c18d.js",
     "service-worker.js": "/atanon/service-worker.js",
     "static/css/main.6c53242a.chunk.css.map": "/atanon/static/css/main.6c53242a.chunk.css.map",
     "static/js/2.1eb9527f.chunk.js.LICENSE": "/atanon/static/js/2.1eb9527f.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.6d1e2df4.js",
     "static/js/2.1eb9527f.chunk.js",
     "static/css/main.6c53242a.chunk.css",
-    "static/js/main.fed6792a.chunk.js"
+    "static/js/main.0488f862.chunk.js"
   ]
 }
