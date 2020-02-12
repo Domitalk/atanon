@@ -129,18 +129,28 @@ const NewPost = (props) => {
     }
 
     const rotateLeft = () => {
-        if (!image_url.includes("w_400/a_270")){
+        if (!image_url.includes("w_400")){
             let tempurl = image_url 
             let temparray = tempurl.split("/")
             let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
-            temparray.splice(stringindex + 1, 0, "w_400/a_270")
+            temparray.splice(stringindex + 1, 0, "w_400/a_90")
             let newURL = temparray.join("/")
             setImage_url(`${newURL}`)
         } else {
             let tempurl = image_url 
             let temparray = tempurl.split("/")
             let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
-            temparray.splice(stringindex + 1, 2)
+            let newangle = ""
+            if (temparray[stringindex + 2] === "a_90") {
+                newangle = "a_180"
+            } else if (temparray[stringindex +2] === "a_180") {
+                newangle = "a_270"
+            } else if (temparray[stringindex +2] === "a_270") {
+                newangle = "a_360"
+            } else {
+                newangle ="a_90"
+            }
+            temparray.splice(stringindex + 2, 1, `${newangle}`)
             let newURL = temparray.join("/")
             setImage_url(`${newURL}`)
         }
@@ -184,7 +194,7 @@ const NewPost = (props) => {
                                 onChange={handleChange}
                                 variant="filled"
                             />
-                            <Button onClick={rotateLeft} classes={styles}>Rotate Counter-clock</Button>
+                            <Button onClick={rotateLeft} classes={styles}>Rotate</Button>
 
                             <p>*While uploading on mobile, some cameras save at different angles than expected.</p>
                             {/* <h3>Comment</h3>
