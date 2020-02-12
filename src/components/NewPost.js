@@ -115,6 +115,17 @@ const NewPost = (props) => {
     // a check on whether the widget uploaded image
     const checkUploadResult = (resultEvent, errorEvent) => {
         if (resultEvent.event === 'success') {
+            if (( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 )) {
+                let tempurl = resultEvent.info.secure_url
+                let temparray = tempurl.split("/")
+                let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
+                temparray.splice(stringindex + 1, 0, "w_400/a_270")
+                let newURL = temparray.join("/")
+                setImage_url(`${newURL}`)
+            } else {
+                setImage_url(`${resultEvent.info.secure_url}`)
+            }
+              
             // console.log("photo url", resultEvent.info.secure_url)
             // let tempurl = resultEvent.info.secure_url
             // let temparray = tempurl.split("/")
@@ -127,23 +138,23 @@ const NewPost = (props) => {
         // use the hook to setImage_url 
     }
 
-    const rotateLeft = () => {
-        if (!image_url.includes("w_400/a_270")){
-            let tempurl = image_url 
-            let temparray = tempurl.split("/")
-            let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
-            temparray.splice(stringindex + 1, 0, "w_400/a_270")
-            let newURL = temparray.join("/")
-            setImage_url(`${newURL}`)
-        } else {
-            let tempurl = image_url 
-            let temparray = tempurl.split("/")
-            let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
-            temparray.splice(stringindex + 1, 2)
-            let newURL = temparray.join("/")
-            setImage_url(`${newURL}`)
-        }
-    }
+    // const rotateLeft = () => {
+    //     if (!image_url.includes("w_400/a_270")){
+    //         let tempurl = image_url 
+    //         let temparray = tempurl.split("/")
+    //         let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
+    //         temparray.splice(stringindex + 1, 0, "w_400/a_270")
+    //         let newURL = temparray.join("/")
+    //         setImage_url(`${newURL}`)
+    //     } else {
+    //         let tempurl = image_url 
+    //         let temparray = tempurl.split("/")
+    //         let stringindex = temparray.findIndex((splitstring) => splitstring === "upload")
+    //         temparray.splice(stringindex + 1, 2)
+    //         let newURL = temparray.join("/")
+    //         setImage_url(`${newURL}`)
+    //     }
+    // }
 
     return(
         <div className="spaced" className={classes.root}>
@@ -183,9 +194,9 @@ const NewPost = (props) => {
                                 onChange={handleChange}
                                 variant="filled"
                             />
-                            <Button onClick={rotateLeft} classes={styles}>Rotate Counter-clock</Button>
+                            {/* <Button onClick={rotateLeft} classes={styles}>Rotate Counter-clock</Button> */}
 
-                            <p>*While uploading on mobile, some cameras save at different angles than expected.</p>
+                            {/* <p>*While uploading on mobile, some cameras save at different angles than expected.</p> */}
                             {/* <h3>Comment</h3>
                             <textarea name="comment" value={comment} onChange={handleChange} /> */}
                             {/* <br></br> */}
