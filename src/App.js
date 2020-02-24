@@ -240,7 +240,9 @@ function App(props) {
         >
           <Fade in={open}>
             <div className={classes.paper} onClick={handleClose} >
+              
               <h2 id="transition-modal-title">Welcome to @ANON</h2>
+              <h2>If this is the first time loading the site please wait a few seconds and reload as heroku puts the API to sleep if it has been inactive</h2>
               <p id="transition-modal-description">Where you can post and react anonymously</p>
               <p id="transition-modal-description">If you double click/tap on a post you can add tags</p>
 
